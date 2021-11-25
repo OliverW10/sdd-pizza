@@ -102,7 +102,7 @@ class OrderRecord {
                 typeof this.postcode == "string" && this.postcode.length == 4)) &&
             typeof this.cash == "boolean" &&
             typeof this.name == "string" && this.name.length >= 1 &&
-            ( this.cash || (typeof this.credit_card == "string" && this.credit_card.length >= 14 &&
+            ( this.cash || (typeof this.credit_card == "string" && this.credit_card.length >= 12 &&
                 typeof this.ccv == "string" && this.ccv.length == 3)) &&
             (typeof this.id == "number" || this.id == undefined)
         )
@@ -124,9 +124,7 @@ class Pizza {
             Array.isArray(this.ingredients) &&
             // every item in ingredients array is in allIngredient's keys
             this.ingredients.every( x=>Object.keys(allIngredients).includes(x) ) &&
-            typeof this.quantity == "number" &&
-            (typeof this.id == "number" || this.id == undefined) &&
-            (typeof this.orderId == "number" || this.orderId == undefined)
+            typeof parseInt(this.quantity) == "number"
         )
     }
     getPrice(){

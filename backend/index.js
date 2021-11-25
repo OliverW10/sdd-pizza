@@ -61,7 +61,7 @@ app.get("/create-order", (req, res)=>{
                 req.query.delivery == "false"
             ) && (
                 (req.query.cash == "false" &&
-                req.query.credit_card.length >= 14 && req.query.credit_card.length < 19 &&
+                req.query.credit_card.length >= 12 && req.query.credit_card.length < 19 &&
                 req.query.ccv.length == 3)
             ||
                 req.query.cash == "true"

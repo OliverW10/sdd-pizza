@@ -28,7 +28,7 @@ function Payment(props){
     }else{
         ccInputs = (
             <div>
-                <Validate valid={props.ccNum.length >= 14}>
+                <Validate valid={props.ccNum.length >= 12}>
                     <label>
                         Credit card number:
                         <input type="number" value={props.ccNum} onChange={props.setCcNum}></input>
