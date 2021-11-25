@@ -194,19 +194,20 @@ export class Checkout extends React.Component{
                     }else{
                         this.setState({feedback: [...this.state.feedback, {text:`Failed to add order: ${res}`, status:false}]})
                     }
+                    // have to send pizzas after order beacuse of foreign key referance
+                    // goes through sending each pizza
+                    for(const pizza of this.props.pizzas){
+                        database.addPizza(pizza, order_id, res=>{
+                            console.log("added pizza, res:",res);
+                            if(!res.startsWith("error")){
+                                this.setState({feedback: [...this.state.feedback, {text:"Added pizza", status:true}]})
+                            }else{
+                                this.setState({feedback: [...this.state.feedback, {text:`Failed to add pizza: ${res}`, status:false}]})
+                            }
+                        })
+                    }
                 }
             )
-            // goes through sending each pizza
-            for(const pizza of this.props.pizzas){
-                database.addPizza(pizza, order_id, res=>{
-                    console.log("added pizza, res:",res);
-                    if(!res.startsWith("error")){
-                        this.setState({feedback: [...this.state.feedback, {text:"Added pizza", status:true}]})
-                    }else{
-                        this.setState({feedback: [...this.state.feedback, {text:`Failed to add pizza: ${res}`, status:false}]})
-                    }
-                })
-            }
         }
 
         // checks if all inputs are valid and we can create an order
